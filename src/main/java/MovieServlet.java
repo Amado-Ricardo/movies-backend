@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
 @WebServlet(name="MovieServlet", urlPatterns = "/movies")
 public class MovieServlet extends HttpServlet {
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -54,6 +55,8 @@ public class MovieServlet extends HttpServlet {
 
             Movie[] movies = new Gson().fromJson(reader, Movie[].class);
 
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).insert(movies[0]);
+
             for(Movie movie: movies){
                 System.out.println(movie.getId());
                 System.out.println(movie.getTitle());
@@ -66,7 +69,7 @@ public class MovieServlet extends HttpServlet {
                 System.out.println("*****************************************");
             }
 
-            out.println(new Gson().toJson(DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).all()));
+
 
         }catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -91,10 +94,9 @@ public class MovieServlet extends HttpServlet {
 
 //            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
 
-            Movie movies = new Gson().fromJson(request.getReader(), Movie.class);
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).update(movies);
+            Movie movie = new Gson().fromJson(request.getReader(), Movie.class);
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).update(movie);
 
-            for(Movie movie: movies){
                 System.out.println(movie.getId());
                 System.out.println(movie.getTitle());
                 System.out.println(movie.getDirector());
@@ -104,7 +106,6 @@ public class MovieServlet extends HttpServlet {
                 System.out.println(movie.getPlot());
                 System.out.println(movie.getPoster());
                 System.out.println("*****************************************");
-            }
 
 
         } catch (SQLException e) {
@@ -136,12 +137,16 @@ public class MovieServlet extends HttpServlet {
 
             BufferedReader reader = request.getReader();
 
-            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
+//            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
 
             int id = new Gson().fromJson(reader, int.class);
 
-            System.out.println("The movie id to delete: " + id);
 
+//            var id = new Gson().fromJson(request.getReader(), int.class);
+
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).destroy(id);
+
+            System.out.println("The movie id to delete: " + id);
 
 
         }catch (Exception ex){

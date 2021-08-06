@@ -33,7 +33,7 @@ fetch("http://localhost:8080/movies", {
         'Content-Type': 'application/json'
     },
     redirect: 'follow',
-    body: JSON.stringify(11)
+    body: JSON.stringify(3)
 }).then(function(response) {
     return response.json();
 }).then(function(data) {
@@ -41,4 +41,42 @@ fetch("http://localhost:8080/movies", {
 });
 
 
-//************************************************************:
+//************************************************************
+
+
+fetch("http://localhost:8080/movies", {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    body: JSON.stringify({
+        "title": "Resident Evil 22",
+        "rating": "5",
+        "poster": "https://m.media-amazon.com/images/M/MV5BZmI1ZGRhNDYtOGVjZC00MmUyLThlNTktMTQyZGE3MzE1ZTdlXkEyXkFqcGdeQXVyNDE5MTU2MDE@._V1_SX300.jpg",
+        "year": "2002",
+        "genre": "Action, Horror, Sci-Fi",
+        "director": "Paul W.S. Anderson",
+        "plot": "A special military unit fights a powerful, out-of-control supercomputer and hundreds of scientists who have mutated into flesh-eating creatures after a laboratory accident.",
+        "actors": "Ryan McCluskey, Oscar Pearce, Indra Ové, Anna Bolt",
+        "id": 3
+    })
+}).then(function(response) {
+    return response.json();
+}).then(function(data) {
+    console.log(data);
+});
+
+//********************************************************
+
+fetch("http://localhost:8080/movies", {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    redirect: 'follow'
+}).then(function(response) {
+    return response.json();
+}).then(function(data) {
+    console.log(data);
+});
