@@ -101,9 +101,9 @@ public class MySqlMoviesDao implements MoviesDao {
 
         // Build sql template
         StringBuilder sql = new StringBuilder("UPDATE movies (" +
-                "SET title = '?', rating = '?', genre = '?', actors = '?', director = '?', " +
-                "plot = '?', year = '?', poster = '?') " +
-                "WHERE id = '?' ");
+                "SET title = ?, rating = ?, genre = ?, actors = ?, director = ?, " +
+                "plot = ?, year = ?, poster = ?) " +
+                "WHERE id = ? ");
 
         // Use the sql string to create a prepared statement
         PreparedStatement statement = connection.prepareStatement(sql.toString());

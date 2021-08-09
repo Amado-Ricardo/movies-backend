@@ -1,26 +1,25 @@
 package data;
 
-
-
-
-
 public class DaoFactory {
 
     private static MoviesDao moviesDao;
-//    private static Config config = new Config();
-    public enum ImplType {MYSQL, IN_MEMORY}; // notice we have two values here
+    private static Config config = new Config();
+    public enum ImplType {MYSQL, IN_MEMORY};
 
     public static MoviesDao getMoviesDao(ImplType implementationType){
 
         switch(implementationType){
-            case IN_MEMORY: { //yet we have one switch case. We'll get to that!
-                if(moviesDao == null) {
+            case IN_MEMORY:{
+                if (moviesDao == null){
                     moviesDao = new InMemoryMoviesDao();
+                }
+            }
+            case MYSQL:{
+                if (moviesDao == null){
+                    moviesDao = new MySqlMoviesDao(config);
                 }
             }
         }
         return moviesDao;
     }
-
-
 }
