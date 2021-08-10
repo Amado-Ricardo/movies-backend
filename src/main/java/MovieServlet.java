@@ -76,13 +76,8 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-            BufferedReader reader = request.getReader();
-
-//            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
-
             Movie movie = new Gson().fromJson(request.getReader(), Movie.class);
             DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).update(movie);
-
 
         } catch (SQLException e) {
             out.println(new Gson().toJson(e.getLocalizedMessage()));

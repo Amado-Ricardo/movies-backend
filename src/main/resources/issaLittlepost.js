@@ -5,15 +5,15 @@ fetch("http://localhost:8080/movies", {
     },
     redirect: 'follow',
     body: JSON.stringify([{
-        "title": "Black Hawk Down",
+        "title": "Pootie Tang",
         "rating": "5",
-        "id": 1,
-        "genre": "War, Action",
-        "actors": "Josh Hartnett, Ewan McGregor, Tom Sizemore, Eric Bana",
-        "director": "Ridley Scott",
-        "plot": "160 elite U.S. soldiers drop into Somalia to capture two top lieutenants of a renegade warlord and find themselves in a desperate battle with a large force of heavily-armed Somalis.",
-        "year": "1990",
-        "poster": "https://m.media-amazon.com/images/M/MV5BYWMwMzQxZjQtODM1YS00YmFiLTk1YjQtNzNiYWY1MDE4NTdiXkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SX300.jpg"
+        "id": 8,
+        "genre": "Comedy, Action",
+        "actors": "Lance Crouther, Chris Rock, Wanda Sykes",
+        "director": "Louis C. K.",
+        "plot": "\"The Man\" is baffled by a chill hero's invincible weapon: gibberish.",
+        "year": "2001",
+        "poster": "https://images-na.ssl-images-amazon.com/images/I/51ahSJ4EZ5L._AC_.jpg"
     }])
 }).then(function(response) {
     return response.json();
@@ -33,7 +33,7 @@ fetch("http://localhost:8080/movies", {
         'Content-Type': 'application/json'
     },
     redirect: 'follow',
-    body: JSON.stringify(3)
+    body: JSON.stringify(8)
 }).then(function(response) {
     return response.json();
 }).then(function(data) {

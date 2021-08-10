@@ -102,23 +102,24 @@ public class MySqlMoviesDao implements MoviesDao {
     public void update(Movie movie) throws SQLException {
 
         // Build sql template
-        String sql = "UPDATE movies (" +
+        String sql = "UPDATE movies " +
                 "SET title = ?, rating = ?, genre = ?, actors = ?, director = ?, " +
-                "plot = ?, year = ?, poster = ?) " +
+                "plot = ?, year = ?, poster = ? " +
                 "WHERE id = ? ";
 
         // Use the sql string to create a prepared statement
         PreparedStatement statement = connection.prepareStatement(sql);
 
-        statement.setInt(1, movie.getId());
-        statement.setString(2, movie.getTitle());
-        statement.setInt(3, movie.getYear());
-        statement.setString(4, movie.getDirector());
-        statement.setString(5, movie.getActors());
-        statement.setInt(6, movie.getRating());
-        statement.setString(7, movie.getPoster());
-        statement.setString(8, movie.getGenre());
-        statement.setString(9, movie.getPlot());
+
+        statement.setString(1, movie.getTitle());
+        statement.setInt(2, movie.getRating());
+        statement.setString(3, movie.getGenre());
+        statement.setString(4, movie.getActors());
+        statement.setString(5, movie.getDirector());
+        statement.setString(6, movie.getPlot());
+        statement.setInt(7, movie.getYear());
+        statement.setString(8, movie.getPoster());
+        statement.setInt(9, movie.getId());
 
         statement.executeUpdate();
 
