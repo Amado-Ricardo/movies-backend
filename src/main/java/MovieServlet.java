@@ -63,7 +63,7 @@ public class MovieServlet extends HttpServlet {
                 System.out.println(movie.getDirector());
                 System.out.println(movie.getActors());
                 System.out.println(movie.getGenre());
-                System.out.println(movie.getImdbID());
+                System.out.println(movie.getRating());
                 System.out.println(movie.getPlot());
                 System.out.println(movie.getPoster());
                 System.out.println("*****************************************");
@@ -102,7 +102,7 @@ public class MovieServlet extends HttpServlet {
                 System.out.println(movie.getDirector());
                 System.out.println(movie.getActors());
                 System.out.println(movie.getGenre());
-                System.out.println(movie.getImdbID());
+                System.out.println(movie.getRating());
                 System.out.println(movie.getPlot());
                 System.out.println(movie.getPoster());
                 System.out.println("*****************************************");
