@@ -15,7 +15,6 @@ import java.sql.SQLException;
 public class MovieServlet extends HttpServlet {
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
@@ -26,8 +25,6 @@ public class MovieServlet extends HttpServlet {
         try {
 
             out = response.getWriter();
-
-//            Movie movie = new Movie(2, "King Kong", "1942", "Harry Carey", "Fay Ray", "8675309", "there aint one", "cheap", "gorilla on skyscrapper");
 
             MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
 
