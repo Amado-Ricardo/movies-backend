@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import data.DaoFactory;
+import data.InMemoryMoviesDao;
 import data.Movie;
 import data.MoviesDao;
 
@@ -11,7 +12,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name="MovieServlet", urlPatterns = "/movies")
+@WebServlet(name="MovieServlet", urlPatterns = "/movies/*")
 public class MovieServlet extends HttpServlet {
 
 
@@ -26,9 +27,13 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
+//            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
 
-            String moviesString = new Gson().toJson(moviesDao.all());
+            Movie movie = new Movie(1, "Fight Club", 1999, "David Fincher", "Brad Pitt, Edward Norton, Helena Bonham Carter, Jared Leto", 5, "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg", "Thriller/Drama", "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more." );
+
+            String moviesString = new Gson().toJson(movie);
+
+//            String moviesString = new Gson().toJson(moviesDao.all());
 
             out.println(moviesString);
 

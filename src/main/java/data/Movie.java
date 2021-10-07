@@ -12,8 +12,7 @@ public class Movie {
     private String genre;
     private String plot;
 
-    public Movie() {
-    }
+
 
     public Movie(int id, String title, int year, String director, String actors, int rating, String poster, String genre, String plot) {
         this.id = id;
@@ -25,6 +24,10 @@ public class Movie {
         this.poster = poster;
         this.genre = genre;
         this.plot = plot;
+    }
+
+    public Movie() {
+
     }
 
     public int getId() {
