@@ -26,6 +26,8 @@ public class MySqlMoviesDao implements MoviesDao {
 
     @Override
     public List<Movie> all() throws SQLException {
+
+        //
         Statement statement = connection.createStatement();
 
         ResultSet rs = statement.executeQuery("SELECT * FROM movies");
@@ -82,15 +84,15 @@ public class MySqlMoviesDao implements MoviesDao {
         // You could use a for loop to do this as well and use its incrementor
         int counter = 0;
         for (Movie movie : movies) {
-            statement.setInt((counter * 9) + 1, movie.getId());
-            statement.setString((counter * 9) + 2, movie.getTitle());
-            statement.setInt((counter * 9) + 3, movie.getYear());
-            statement.setString((counter * 9) + 4, movie.getDirector());
+            statement.setString((counter * 9) + 1, movie.getTitle());
+            statement.setInt((counter * 9) + 2, movie.getRating());
+            statement.setInt((counter * 9) + 3, movie.getId());
+            statement.setString((counter * 9) + 4, movie.getGenre());
             statement.setString((counter * 9) + 5, movie.getActors());
-            statement.setInt((counter * 9) + 6, movie.getRating());
-            statement.setString((counter * 9) + 7, movie.getPoster());
-            statement.setString((counter * 9) + 8, movie.getGenre());
-            statement.setString((counter * 9) + 9, movie.getPlot());
+            statement.setString((counter * 9) + 6, movie.getDirector());
+            statement.setString((counter * 9) + 7, movie.getPlot());
+            statement.setInt((counter * 9) + 8, movie.getYear());
+            statement.setString((counter * 9) + 9, movie.getPoster());
             counter++;
         }
         statement.executeUpdate();
@@ -100,23 +102,24 @@ public class MySqlMoviesDao implements MoviesDao {
     public void update(Movie movie) throws SQLException {
 
         // Build sql template
-        StringBuilder sql = new StringBuilder("UPDATE movies (" +
+        String sql = "UPDATE movies " +
                 "SET title = ?, rating = ?, genre = ?, actors = ?, director = ?, " +
-                "plot = ?, year = ?, poster = ?) " +
-                "WHERE id = ? ");
+                "plot = ?, year = ?, poster = ? " +
+                "WHERE id = ? ";
 
         // Use the sql string to create a prepared statement
-        PreparedStatement statement = connection.prepareStatement(sql.toString());
+        PreparedStatement statement = connection.prepareStatement(sql);
 
-        statement.setInt(1, movie.getId());
-        statement.setString(2, movie.getTitle());
-        statement.setInt(3, movie.getYear());
-        statement.setString(4, movie.getDirector());
-        statement.setString(5, movie.getActors());
-        statement.setInt(6, movie.getRating());
-        statement.setString(7, movie.getPoster());
-        statement.setString(8, movie.getGenre());
-        statement.setString(9, movie.getPlot());
+
+        statement.setString(1, movie.getTitle());
+        statement.setInt(2, movie.getRating());
+        statement.setString(3, movie.getGenre());
+        statement.setString(4, movie.getActors());
+        statement.setString(5, movie.getDirector());
+        statement.setString(6, movie.getPlot());
+        statement.setInt(7, movie.getYear());
+        statement.setString(8, movie.getPoster());
+        statement.setInt(9, movie.getId());
 
         statement.executeUpdate();
 
@@ -124,6 +127,14 @@ public class MySqlMoviesDao implements MoviesDao {
 
     @Override
     public void destroy(int id) throws SQLException {
+
+        String sql = "DELETE FROM movies WHERE id = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setInt(1, id);
+
+        statement.execute();
 
     }
 

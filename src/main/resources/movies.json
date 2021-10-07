@@ -35,7 +35,7 @@
   {
     "title": "Kimi No Na Wa",
     "rating": "5",
-    "id": 5,
+    "id": 4,
     "genre": "Animation, Drama",
     "actors": "Mone Kamishiraishi, Ryûnosuke Kamiki, Aoi Yūki",
     "director": "Makoto Shinkai",
@@ -46,7 +46,7 @@
   {
     "title": "Fight Club",
     "rating": "5",
-    "id": 6,
+    "id": 5,
     "genre": "Drama",
     "actors": "Brad Pitt, Edward Norton, Meatloaf",
     "director": "David Fincher",
@@ -57,7 +57,7 @@
   {
     "title": "Speed Racer",
     "rating": "5",
-    "id": 7,
+    "id": 6,
     "genre": "Action, Adventure, Comedy",
     "actors": "Emile Hirsch, Christina Ricci, John Goodman, Susan Sarandon, Matthew Fox",
     "director": "The Wachowskis",
@@ -66,16 +66,9 @@
     "poster": "https://michaelgiacchino.com/wp-content/uploads/2008/05/speed_racer_ver5_xlg.jpg"
   },
   {
-    "title": "Boogalo",
-    "rating": "3",
-    "id": 8,
-    "poster": "https://m.media-amazon.com/images/M/MV5BNGMwNGI0NzAtY2U1Zi00MTI3LTk2NWQtMTU0ZmQ3OGZmMjc2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UY1200_CR86,0,630,1200_AL_.jpg",
-    "year": "1984"
-  },
-  {
     "title": "Pootie Tang",
     "rating": "5",
-    "id": 9,
+    "id": 7,
     "genre": "Comedy, Action",
     "actors": "Lance Crouther, Chris Rock, Wanda Sykes",
     "director": "Louis C. K.",

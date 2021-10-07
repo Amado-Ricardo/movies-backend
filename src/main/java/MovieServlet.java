@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import data.DaoFactory;
+import data.InMemoryMoviesDao;
 import data.Movie;
 import data.MoviesDao;
 
@@ -11,9 +12,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name="MovieServlet", urlPatterns = "/movies")
+@WebServlet(name="MovieServlet", urlPatterns = "/movies/*")
 public class MovieServlet extends HttpServlet {
-
 
 
     @Override
@@ -27,11 +27,13 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-//            Movie movie = new Movie(2, "King Kong", "1942", "Harry Carey", "Fay Ray", "8675309", "there aint one", "cheap", "gorilla on skyscrapper");
+//            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
 
-            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY);
+            Movie movie = new Movie(1, "Fight Club", 1999, "David Fincher", "Brad Pitt, Edward Norton, Helena Bonham Carter, Jared Leto", 5, "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg", "Thriller/Drama", "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more." );
 
-            String moviesString = new Gson().toJson(moviesDao.all());
+            String moviesString = new Gson().toJson(movie);
+
+//            String moviesString = new Gson().toJson(moviesDao.all());
 
             out.println(moviesString);
 
@@ -55,21 +57,7 @@ public class MovieServlet extends HttpServlet {
 
             Movie[] movies = new Gson().fromJson(reader, Movie[].class);
 
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).insert(movies[0]);
-
-            for(Movie movie: movies){
-                System.out.println(movie.getId());
-                System.out.println(movie.getTitle());
-                System.out.println(movie.getDirector());
-                System.out.println(movie.getActors());
-                System.out.println(movie.getGenre());
-                System.out.println(movie.getRating());
-                System.out.println(movie.getPlot());
-                System.out.println(movie.getPoster());
-                System.out.println("*****************************************");
-            }
-
-
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insertAll(movies);
 
         }catch (Exception ex){
             System.out.println(ex.getMessage());
@@ -90,23 +78,8 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-            BufferedReader reader = request.getReader();
-
-//            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
-
             Movie movie = new Gson().fromJson(request.getReader(), Movie.class);
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).update(movie);
-
-                System.out.println(movie.getId());
-                System.out.println(movie.getTitle());
-                System.out.println(movie.getDirector());
-                System.out.println(movie.getActors());
-                System.out.println(movie.getGenre());
-                System.out.println(movie.getRating());
-                System.out.println(movie.getPlot());
-                System.out.println(movie.getPoster());
-                System.out.println("*****************************************");
-
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).update(movie);
 
         } catch (SQLException e) {
             out.println(new Gson().toJson(e.getLocalizedMessage()));
@@ -137,14 +110,9 @@ public class MovieServlet extends HttpServlet {
 
             BufferedReader reader = request.getReader();
 
-//            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
-
             int id = new Gson().fromJson(reader, int.class);
 
-
-//            var id = new Gson().fromJson(request.getReader(), int.class);
-
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.IN_MEMORY).destroy(id);
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).destroy(id);
 
             System.out.println("The movie id to delete: " + id);
 
