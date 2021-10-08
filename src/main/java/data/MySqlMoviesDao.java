@@ -57,8 +57,33 @@ public class MySqlMoviesDao implements MoviesDao {
     }
 
     @Override
-    public void insert(Movie movie) {
+    public void insert(Movie movie) throws SQLException {
 
+        // Build sql template
+        String sql = "INSERT INTO movies " +
+                "SET title = ?, rating = ?";
+
+//                " genre = ?, actors = ?, director = ?, " +
+//                "plot = ?, year = ?, poster = ? ";
+
+//        +
+//                "WHERE id = ? ";
+
+        // Use the sql string to create a prepared statement
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+
+        statement.setString(1, movie.getTitle());
+        statement.setInt(2, movie.getRating());
+//        statement.setString(3, movie.getGenre());
+//        statement.setString(4, movie.getActors());
+//        statement.setString(5, movie.getDirector());
+//        statement.setString(6, movie.getPlot());
+//        statement.setInt(7, movie.getYear());
+//        statement.setString(8, movie.getPoster());
+//        statement.setInt(9, movie.getId());
+
+        statement.executeUpdate();
     }
 
     @Override
