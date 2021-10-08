@@ -27,13 +27,9 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-//            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
+            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
 
-            Movie movie = new Movie(1, "Fight Club", 1999, "David Fincher", "Brad Pitt, Edward Norton, Helena Bonham Carter, Jared Leto", 5, "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg", "Thriller/Drama", "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more." );
-
-            String moviesString = new Gson().toJson(movie);
-
-//            String moviesString = new Gson().toJson(moviesDao.all());
+            String moviesString = new Gson().toJson(moviesDao.all());
 
             out.println(moviesString);
 
@@ -58,6 +54,7 @@ public class MovieServlet extends HttpServlet {
             Movie[] movies = new Gson().fromJson(reader, Movie[].class);
 
             DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insertAll(movies);
+
 
         }catch (Exception ex){
             System.out.println(ex.getMessage());

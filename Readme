@@ -1,0 +1,5 @@
+To bypass CORS policy run the following command in the OSX terminal:
+
+ open /Applications/Google\ Chrome.app --args --user-data-dir="/var/tmp/Chrome dev session" --disable-web-security
+
+This will allow us to have the client and backend pass information to eachother.
