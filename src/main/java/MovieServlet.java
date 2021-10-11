@@ -1,6 +1,5 @@
 import com.google.gson.Gson;
 import data.DaoFactory;
-import data.InMemoryMoviesDao;
 import data.Movie;
 import data.MoviesDao;
 
@@ -49,11 +48,13 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-            BufferedReader reader = request.getReader();
+//            BufferedReader reader = request.getReader();
+//
+//            Movie movies = new Gson().fromJson(reader, Movie.class);
 
-            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
+            Movie movies = new Gson().fromJson(request.getReader(), Movie.class);
 
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insertAll(movies);
+            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insert(movies);
 
 
         }catch (Exception ex){
