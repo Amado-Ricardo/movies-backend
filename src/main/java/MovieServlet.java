@@ -44,17 +44,21 @@ public class MovieServlet extends HttpServlet {
 
         response.setContentType("application/json");
 
-        PrintWriter out = null;
+        PrintWriter out = response.getWriter();
 
         try{
 
-            out = response.getWriter();
+//            out = response.getWriter();
 
             BufferedReader reader = request.getReader();
 
-            Movie movies = new Gson().fromJson(reader, Movie.class);
+            Movie movie = new Gson().fromJson(reader, Movie.class);
 
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insert(movies);
+//            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insert(movies);
+
+            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
+
+            moviesDao.insert(movie);
 
 
         }catch (Exception ex){
