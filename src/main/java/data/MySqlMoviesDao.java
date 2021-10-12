@@ -98,19 +98,18 @@ public class MySqlMoviesDao implements MoviesDao {
         moviesMap.put(newId, movie);
 
         // Build sql template
-        String sql = "INSERT INTO movies " +
-                "SET title = ?, rating = ?"
-//                " genre = ?, actors = ?, director = ?, " +
+        String sql = "INSERT INTO movies VALUES " +
+                "(title = ?, rating = ?)";
+//                "genre = ?, actors = ?, director = ?, " +
 //                "plot = ?, year = ?, poster = ? "
-                + "WHERE id = ? ";
+//                + "WHERE id = ?";
 
         // Use the sql string to create a prepared statement
         PreparedStatement statement = connection.prepareStatement(sql);
 
-
         statement.setString(1, movie.getTitle());
         statement.setString(2, movie.getRating());
-        statement.setInt(3, movie.getId());
+//        statement.setInt(3, movie.getId());
 //        statement.setString(4, movie.getGenre());
 //        statement.setString(5, movie.getActors());
 //        statement.setString(6, movie.getDirector());

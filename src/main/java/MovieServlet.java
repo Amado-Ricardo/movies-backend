@@ -3,15 +3,17 @@ import data.DaoFactory;
 import data.Movie;
 import data.MoviesDao;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name="MovieServlet", urlPatterns = "/movies/*")
+@WebServlet(name="MovieServlet", urlPatterns = "/movies")
 public class MovieServlet extends HttpServlet {
 
 
@@ -38,7 +40,7 @@ public class MovieServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/json");
 
@@ -48,11 +50,9 @@ public class MovieServlet extends HttpServlet {
 
             out = response.getWriter();
 
-//            BufferedReader reader = request.getReader();
-//
-//            Movie movies = new Gson().fromJson(reader, Movie.class);
+            BufferedReader reader = request.getReader();
 
-            Movie movies = new Gson().fromJson(request.getReader(), Movie.class);
+            Movie movies = new Gson().fromJson(reader, Movie.class);
 
             DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insert(movies);
 
