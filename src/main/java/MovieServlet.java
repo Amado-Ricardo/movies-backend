@@ -1,18 +1,19 @@
 import com.google.gson.Gson;
 import data.DaoFactory;
-import data.InMemoryMoviesDao;
 import data.Movie;
 import data.MoviesDao;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name="MovieServlet", urlPatterns = "/movies/*")
+@WebServlet(name="MovieServlet", urlPatterns = "/movies")
 public class MovieServlet extends HttpServlet {
 
 
@@ -39,21 +40,25 @@ public class MovieServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/json");
 
-        PrintWriter out = null;
+        PrintWriter out = response.getWriter();
 
         try{
 
-            out = response.getWriter();
+//            out = response.getWriter();
 
             BufferedReader reader = request.getReader();
 
-            Movie[] movies = new Gson().fromJson(reader, Movie[].class);
+            Movie movie = new Gson().fromJson(reader, Movie.class);
 
-            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insertAll(movies);
+//            DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL).insert(movies);
+
+            MoviesDao moviesDao = DaoFactory.getMoviesDao(DaoFactory.ImplType.MYSQL);
+
+            moviesDao.insert(movie);
 
 
         }catch (Exception ex){

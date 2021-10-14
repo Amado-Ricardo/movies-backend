@@ -7,14 +7,12 @@ public class Movie {
     private int year;
     private String director;
     private String actors;
-    private int rating;
+    private String rating;
     private String poster;
     private String genre;
     private String plot;
 
-
-
-    public Movie(int id, String title, int year, String director, String actors, int rating, String poster, String genre, String plot) {
+    public Movie(int id, String title, int year, String director, String actors, String rating, String poster, String genre, String plot) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -70,14 +68,6 @@ public class Movie {
         this.actors = actors;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
     public String getPoster() {
         return poster;
     }
@@ -100,5 +90,13 @@ public class Movie {
 
     public void setPlot(String plot) {
         this.plot = plot;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

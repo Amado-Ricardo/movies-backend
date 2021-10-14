@@ -6,16 +6,27 @@ DROP TABLE IF EXISTS movies;
 
 CREATE TABLE movies(
     title VARCHAR(100) NOT NULL,
-    rating INT NOT NULL,
-    id INT UNSIGNED NOT NULL,
-    genre VARCHAR(100) NOT NULL,
-    actors VARCHAR(100) NOT NULL,
-    director VARCHAR(100) NOT NULL,
-    plot TEXT NOT NULL,
-    year INT UNSIGNED NOT NULL,
-    poster TEXT NOT NULL,
+    rating VARCHAR(10) NOT NULL,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    genre VARCHAR(100),
+    actors VARCHAR(100),
+    director VARCHAR(100),
+    plot TEXT,
+    year INT UNSIGNED,
+    poster TEXT,
     PRIMARY KEY (id)
 );
+
+INSERT INTO movies(title, rating, id, genre, actors, director, plot, year, poster) VALUES
+(
+
+)
+
+INSERT INTO movies(title, rating) VALUES
+(
+ 'Godzilla',
+ '5'
+)
 
 
 
